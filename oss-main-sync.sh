@@ -1,6 +1,6 @@
 #!/bin/bash
 # sed -i 's/kubectl/microk8s kubectl/g' test.sh
-app_sync_job=badal773/test:d5c86043-3-20
+app_sync_job=badal773/test:d5c86043-3-21
 git_sensor=
 kubelink=
 kubewatch=
