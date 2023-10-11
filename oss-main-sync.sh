@@ -9,55 +9,29 @@ dashboard=
 devtron=
 image_scanner=
 ci_runner=
-argocd_dex=
+
+# Print the values
+echo "app-sync-job: $app_sync_job"
+echo "git-sensor: $git_sensor"
+echo "kubelink: $kubelink"
+echo "kubewatch: $kubewatch"
+echo "lens: $lens"
+echo "dashboard: $dashboard"
+echo "devtron: $devtron"
+echo "image_scanner: $image_scanner"
+echo "ci-runner: $ci_runner"
 
 echo "========RUNNING MIGRATION==================="
 
-echo "DO YOU WANT TO RUN MIGRATION  -:"
-
-echo "1.FROM MAIN BRANCH"
-echo "2.NO-MIGRATION-ONLY-IMAGE-CHNAGE"
-
-
-
-echo "NOTE-:for custom branch your git repo and branch and hash required "
-echo  -e "\n\n"
-
-while true; do
-    echo "PLEASE ENTER 1 or 2-: "
-    read input
-
-    if [ "$input" = "1" ] || [ "$input" = "2" ] || [ "$input" = "3" ] ; then
-        break
-    else
-        echo -e "Invalid input. Please enter 1 or 2 or 3. \U0001F620"
-    fi
-done
-
-echo "You entered: $input"
+echo "running migration form main"
+echo "now getting the latest hash from git"
+custom_gitrepo="https://github.com/devtron-labs/devtron.git"
+custom_branch="main"
+sudo snap install jq
+main_hash=$(curl -s https://api.github.com/repos/devtron-labs/devtron/commits/main | jq -r '.sha')
+custom_hash=$main_hash
 
 
-
-if [[ $input == 1 ]]; then
-
-    echo "running migration form main"
-    echo "now getting the latest hash from git"
-    custom_gitrepo="https://github.com/devtron-labs/devtron.git"
-    custom_branch="main"
-    sudo snap install jq
-    main_hash=$(curl -s https://api.github.com/repos/devtron-labs/devtron/commits/main | jq -r '.sha')
-    custom_hash=$main_hash
-    echo $input
-elif [[$input ==2 ]]; then 
-    echo "please enter your custom git repo-:"
-    read custom_gitrepo
-    echo "please enter your branch-:"
-    read custom_branch
-    echo "please enter your hash-:"
-    read custom_hash
-else 
-    echo "SKIPPING MIGRATION ONLY WILL BE CHANGE THE IMAGE OF MICROSERVICES"
-fi
 echo $custom_hash
 echo $custom_branch
 echo $custom_gitrepo
@@ -168,28 +142,21 @@ EOF
 kubectl apply -f migrator.yaml -n devtroncd
 
 
+kubectl patch configmap devtron-custom-cm -n devtroncd --patch "{\"data\": {\"DEFAULT_CI_IMAGE\": \"$ci_runner\"}}"
+kubectl patch configmap devtron-custom-cm -n devtroncd --patch "{\"data\": {\"APP_SYNC_IMAGE\": \"$app_sync_job\"}}"
 
-echo "============================================\n"
-devtron_image=""
-while [ -z "$devtron_image" ]
-do
-    echo "=====Please enter the devtron Image-:====="
-    read devtron_image
-done
-kubectl set image deploy/devtron -n devtroncd devtron=$devtron_image 
+kubectl set image deploy/devtron -n devtroncd devtron=$devtron
+kubectl set image deploy/dashboard -n devtroncd dashboard=$dashboard
 
+kubectl set image deploy/kubewatch -n devtroncd kubewatch=$kubewatch
+kubectl set image deploy/kubelink -n devtroncd kubelink=$kubelink
+kubectl set image deploy/lens -n devtroncd lens=$lens
+kubectl set image sts/git-sensor -n devtroncd git-sensor=$git_sensor
+kubectl set image sts/git-sensor -n devtroncd chown-git-base=$git_sensor
+kubectl delete po -n devtroncd git-sensor-0
+kubectl set image deploy/image-scanner -n devtroncd image-scanner=$image_scanner
 
-echo "==========================================\n"
-dashboard_image=""
-while [ -z "$dashboard_image" ]
-do
-    echo "=====Please enter the enterprise-dashboard Image-:====="
-    read dashboard_image
-
-done
-
-kubectl set image deploy/dashboard -n devtroncd dashboard=$dashboard_image 
+kubectl set image cronjob/app-sync-cronjob -n devtroncd chart-sync=$app_sync_job
 
 
-
-echo -e "\e[32m=====================  \U0001F64F\U0001F604  YOU ARE SUCESSFULLY SYNC with MAIN    \U0001F604\U0001F64F  =================\e[0m"
+echo -e "\e[32m=====================  \U0001F64F\U0001F604  YOU ARE SUCESSFULLY SYNC WITH MAIN    \U0001F604\U0001F64F  =================\e[0m"
