@@ -1,14 +1,14 @@
 #!/bin/bash
 # sed -i 's/kubectl/microk8s kubectl/g' test.sh
-app_sync_job=badal773/test:d5c86043-3-27
+app_sync_job=
 git_sensor=
-kubelink=DOCKER_IMAGE
-kubewatch=DOCKER_IMAGE
-lens=DOCKER_IMAGE
-dashboard=DOCKER_IMAGE
+kubelink=
+kubewatch=
+lens=
+dashboard=
 devtron=
-image_scanner=DOCKER_IMAGE
-ci_runner=DOCKER_IMAGE
+image_scanner=
+ci_runner=
 
 # Print the values
 echo "app-sync-job: $app_sync_job"
@@ -146,11 +146,11 @@ kubectl patch configmap devtron-custom-cm -n devtroncd --patch "{\"data\": {\"DE
 kubectl patch configmap devtron-custom-cm -n devtroncd --patch "{\"data\": {\"APP_SYNC_IMAGE\": \"$app_sync_job\"}}"
 
 kubectl set image deploy/devtron -n devtroncd devtron=$devtron
-kubectl set image deploy/dashboard -n devtroncd dashboard=DOCKER_IMAGE
+kubectl set image deploy/dashboard -n devtroncd dashboard=$dashboard
 
-kubectl set image deploy/kubewatch -n devtroncd kubewatch=DOCKER_IMAGE
-kubectl set image deploy/kubelink -n devtroncd kubelink=DOCKER_IMAGE
-kubectl set image deploy/lens -n devtroncd lens=DOCKER_IMAGE
+kubectl set image deploy/kubewatch -n devtroncd kubewatch=$kubewatch
+kubectl set image deploy/kubelink -n devtroncd kubelink=$kubelink
+kubectl set image deploy/lens -n devtroncd lens=$lens
 kubectl set image sts/git-sensor -n devtroncd git-sensor=$git_sensor
 kubectl set image sts/git-sensor -n devtroncd chown-git-base=$git_sensor
 kubectl delete po -n devtroncd git-sensor-0
