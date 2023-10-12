@@ -6,7 +6,7 @@ kubelink=DOCKER_IMAGE
 kubewatch=DOCKER_IMAGE
 lens=
 dashboard=
-devtron=
+devtron=DOCKER_IMAGE
 image_scanner=
 ci_runner=
 
@@ -145,7 +145,7 @@ kubectl apply -f migrator.yaml -n devtroncd
 kubectl patch configmap devtron-custom-cm -n devtroncd --patch "{\"data\": {\"DEFAULT_CI_IMAGE\": \"$ci_runner\"}}"
 kubectl patch configmap devtron-custom-cm -n devtroncd --patch "{\"data\": {\"APP_SYNC_IMAGE\": \"$app_sync_job\"}}"
 
-kubectl set image deploy/devtron -n devtroncd devtron=$devtron
+kubectl set image deploy/devtron -n devtroncd devtron=DOCKER_IMAGE
 kubectl set image deploy/dashboard -n devtroncd dashboard=$dashboard
 
 kubectl set image deploy/kubewatch -n devtroncd kubewatch=DOCKER_IMAGE
