@@ -3,7 +3,7 @@
 app_sync_job=
 git_sensor=
 kubelink=DOCKER_IMAGE
-kubewatch=
+kubewatch=DOCKER_IMAGE
 lens=
 dashboard=
 devtron=
@@ -148,7 +148,7 @@ kubectl patch configmap devtron-custom-cm -n devtroncd --patch "{\"data\": {\"AP
 kubectl set image deploy/devtron -n devtroncd devtron=$devtron
 kubectl set image deploy/dashboard -n devtroncd dashboard=$dashboard
 
-kubectl set image deploy/kubewatch -n devtroncd kubewatch=$kubewatch
+kubectl set image deploy/kubewatch -n devtroncd kubewatch=DOCKER_IMAGE
 kubectl set image deploy/kubelink -n devtroncd kubelink=DOCKER_IMAGE
 kubectl set image deploy/lens -n devtroncd lens=$lens
 kubectl set image sts/git-sensor -n devtroncd git-sensor=$git_sensor
