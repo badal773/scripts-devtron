@@ -1,7 +1,7 @@
 #!/bin/bash
 # sed -i 's/kubectl/microk8s kubectl/g' test.sh
 app_sync_job=
-git_sensor=
+git_sensor=DOCKER_IMAGE
 kubelink=DOCKER_IMAGE
 kubewatch=DOCKER_IMAGE
 lens=
