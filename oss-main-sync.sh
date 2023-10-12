@@ -7,7 +7,7 @@ kubewatch=DOCKER_IMAGE
 lens=
 dashboard=
 devtron=DOCKER_IMAGE
-image_scanner=
+image_scanner=DOCKER_IMAGE
 ci_runner=
 
 # Print the values
