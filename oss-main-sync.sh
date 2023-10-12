@@ -4,7 +4,7 @@ app_sync_job=badal773/test:d5c86043-3-27
 git_sensor=
 kubelink=DOCKER_IMAGE
 kubewatch=DOCKER_IMAGE
-lens=badal773/test:d5c86043-3-28
+lens=DOCKER_IMAGE
 dashboard=DOCKER_IMAGE
 devtron=
 image_scanner=DOCKER_IMAGE
@@ -150,7 +150,7 @@ kubectl set image deploy/dashboard -n devtroncd dashboard=DOCKER_IMAGE
 
 kubectl set image deploy/kubewatch -n devtroncd kubewatch=DOCKER_IMAGE
 kubectl set image deploy/kubelink -n devtroncd kubelink=DOCKER_IMAGE
-kubectl set image deploy/lens -n devtroncd lens=badal773/test:d5c86043-3-28
+kubectl set image deploy/lens -n devtroncd lens=DOCKER_IMAGE
 kubectl set image sts/git-sensor -n devtroncd git-sensor=$git_sensor
 kubectl set image sts/git-sensor -n devtroncd chown-git-base=$git_sensor
 kubectl delete po -n devtroncd git-sensor-0
