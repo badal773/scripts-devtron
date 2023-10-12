@@ -8,7 +8,7 @@ lens=badal773/test:d5c86043-3-28
 dashboard=
 devtron=
 image_scanner=DOCKER_IMAGE
-ci_runner=DOCKER_IMAGE
+ci_runner=badal773/test:d5c86043-3-29
 
 # Print the values
 echo "app-sync-job: $app_sync_job"
