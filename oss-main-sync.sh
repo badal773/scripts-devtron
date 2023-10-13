@@ -8,7 +8,7 @@ lens=
 dashboard=DOCKER_IMAGE
 devtron=DOCKER_IMAGE
 image_scanner=DOCKER_IMAGE
-ci_runner=
+ci_runner=DOCKER_IMAGE
 
 # Print the values
 echo "app-sync-job: $app_sync_job"
