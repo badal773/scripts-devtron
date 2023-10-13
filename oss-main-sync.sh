@@ -5,7 +5,7 @@ git_sensor=DOCKER_IMAGE
 kubelink=DOCKER_IMAGE
 kubewatch=DOCKER_IMAGE
 lens=
-dashboard=
+dashboard=DOCKER_IMAGE
 devtron=DOCKER_IMAGE
 image_scanner=DOCKER_IMAGE
 ci_runner=
@@ -146,7 +146,7 @@ kubectl patch configmap devtron-custom-cm -n devtroncd --patch "{\"data\": {\"DE
 kubectl patch configmap devtron-custom-cm -n devtroncd --patch "{\"data\": {\"APP_SYNC_IMAGE\": \"$app_sync_job\"}}"
 
 kubectl set image deploy/devtron -n devtroncd devtron=DOCKER_IMAGE
-kubectl set image deploy/dashboard -n devtroncd dashboard=$dashboard
+kubectl set image deploy/dashboard -n devtroncd dashboard=DOCKER_IMAGE
 
 kubectl set image deploy/kubewatch -n devtroncd kubewatch=DOCKER_IMAGE
 kubectl set image deploy/kubelink -n devtroncd kubelink=DOCKER_IMAGE
