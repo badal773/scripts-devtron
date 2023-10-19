@@ -8,7 +8,7 @@ lens=
 dashboard=DOCKER_IMAGE
 devtron=DOCKER_IMAGE
 image_scanner=DOCKER_IMAGE
-ci_runner=DOCKER_IMAGE
+ci_runner=quay.io/devtron/ci-runner:ad3af321-541-18798
 
 # Print the values
 echo "app-sync-job: $app_sync_job"
