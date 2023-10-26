@@ -2,7 +2,7 @@
 # sed -i 's/kubectl/microk8s kubectl/g' test.sh
 app_sync_job=quay.io/devtron/chart-sync:0e8c785e-373-18813
 git_sensor=quay.io/devtron/test:b6c3ea0e-536-18811
-kubelink=quay.io/devtron/kubelink:844a53f7-538-18802
+kubelink=quay.io/devtron/kubelink:2dbe99a8-538-18986
 kubewatch=quay.io/devtron/kubewatch:2dbe99a8-539-18987
 lens=quay.io/devtron/lens:8803028b-540-18815
 dashboard=quay.io/devtron/dashboard:b4b369f6-537-18967
@@ -149,7 +149,7 @@ kubectl set image deploy/devtron -n devtroncd devtron=quay.io/devtron/devtron:29
 kubectl set image deploy/dashboard -n devtroncd dashboard=quay.io/devtron/dashboard:b4b369f6-537-18967
 
 kubectl set image deploy/kubewatch -n devtroncd kubewatch=quay.io/devtron/kubewatch:2dbe99a8-539-18987
-kubectl set image deploy/kubelink -n devtroncd kubelink=quay.io/devtron/kubelink:844a53f7-538-18802
+kubectl set image deploy/kubelink -n devtroncd kubelink=quay.io/devtron/kubelink:2dbe99a8-538-18986
 kubectl set image deploy/lens -n devtroncd lens=quay.io/devtron/lens:8803028b-540-18815
 kubectl set image sts/git-sensor -n devtroncd git-sensor=$git_sensor
 kubectl set image sts/git-sensor -n devtroncd chown-git-base=$git_sensor
