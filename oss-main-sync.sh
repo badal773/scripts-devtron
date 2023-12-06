@@ -6,7 +6,7 @@ kubelink=quay.io/devtron/kubelink:2dbe99a8-538-18986
 kubewatch=quay.io/devtron/kubewatch:16a32ab1-539-19633
 lens=quay.io/devtron/lens:3d6e488a-540-19044
 dashboard=quay.io/devtron/dashboard:d684f9c1-537-19865
-devtron=quay.io/devtron/devtron:6f18f2e9-534-19866
+devtron=quay.io/devtron/devtron:33da69b3-534-19876
 image_scanner=quay.io/devtron/image-scanner:2c3eb6f6-559-19333
 ci_runner=quay.io/devtron/ci-runner:560e6867-541-19678
 
@@ -145,7 +145,7 @@ kubectl apply -f migrator.yaml -n devtroncd
 kubectl patch configmap devtron-custom-cm -n devtroncd --patch "{\"data\": {\"DEFAULT_CI_IMAGE\": \"$ci_runner\"}}"
 kubectl patch configmap devtron-custom-cm -n devtroncd --patch "{\"data\": {\"APP_SYNC_IMAGE\": \"$app_sync_job\"}}"
 
-kubectl set image deploy/devtron -n devtroncd devtron=quay.io/devtron/devtron:6f18f2e9-534-19866
+kubectl set image deploy/devtron -n devtroncd devtron=quay.io/devtron/devtron:33da69b3-534-19876
 kubectl set image deploy/dashboard -n devtroncd dashboard=quay.io/devtron/dashboard:d684f9c1-537-19865
 
 kubectl set image deploy/kubewatch -n devtroncd kubewatch=quay.io/devtron/kubewatch:16a32ab1-539-19633
