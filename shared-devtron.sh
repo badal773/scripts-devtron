@@ -5,7 +5,6 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: postgresql-migrate-devtron-$RANDOM
-  namespace: devtroncd
 spec:
   activeDeadlineSeconds: 1500
   backoffLimit: 20
