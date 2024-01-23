@@ -5,6 +5,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: postgresql-migrate-devtron-$RANDOM
+  namespace: $DEVTRON_NAMESPACE
 spec:
   activeDeadlineSeconds: 1500
   backoffLimit: 20
@@ -88,7 +89,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: postgresql-migrate-casbin-$RANDOM
-  namespace: devtroncd
+  namespace: $DEVTRON_NAMESPACE
 spec:
   activeDeadlineSeconds: 1500
   backoffLimit: 20
@@ -184,7 +185,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: postgresql-migrate-gitsensor-$RANDOM
-  namespace: devtroncd
+  namespace: $DEVTRON_NAMESPACE
 spec:
   activeDeadlineSeconds: 1500
   backoffLimit: 20
@@ -270,7 +271,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: postgresql-migrate-lens-$RANDOM
-  namespace: devtroncd
+  namespace: $DEVTRON_NAMESPACE
 spec:
   activeDeadlineSeconds: 1500
   backoffLimit: 20
