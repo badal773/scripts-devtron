@@ -30,17 +30,17 @@ spec:
         - name: DB_USER_NAME
           value: postgres
         - name: DB_HOST
-          value: postgresql-postgresql.devtroncd
+          value: $DB_HOST
         - name: DB_PORT
           value: "5432"
         - name: DB_NAME
-          value: orchestrator
+          value: $DB_NAME_DEVTRON
         - name: MIGRATE_TO_VERSION
           value: "0"
         envFrom:
         - secretRef:
             name: postgresql-migrator
-        image: $migrator
+        image: quay.io/devtron/migrator:v4.16.2
         imagePullPolicy: IfNotPresent
         name: postgresql-migrate-devtron
         resources: {}
@@ -143,17 +143,17 @@ spec:
         - name: DB_USER_NAME
           value: postgres
         - name: DB_HOST
-          value: postgresql-postgresql.devtroncd
+          value: $DB_HOST
         - name: DB_PORT
           value: "5432"
         - name: DB_NAME
-          value: casbin
+          value: $DB_NAME_CASBIN
         - name: MIGRATE_TO_VERSION
           value: "0"
         envFrom:
         - secretRef:
             name: postgresql-migrator
-        image: $migrator
+        image: quay.io/devtron/migrator:v4.16.2
         imagePullPolicy: IfNotPresent
         name: postgresql-migrate-casbin
         resources: {}
@@ -212,17 +212,17 @@ spec:
         - name: DB_USER_NAME
           value: postgres
         - name: DB_HOST
-          value: postgresql-postgresql.devtroncd
+          value: $DB_HOST
         - name: DB_PORT
           value: "5432"
         - name: DB_NAME
-          value: git_sensor
+          value: DB_NAME_GIT_SENSOR
         - name: MIGRATE_TO_VERSION
           value: "0"
         envFrom:
         - secretRef:
             name: postgresql-migrator
-        image: $migrator
+        image: quay.io/devtron/migrator:v4.16.2
         imagePullPolicy: IfNotPresent
         name: postgresql-migrate-git-sensor
         resources: {}
@@ -296,17 +296,17 @@ spec:
         - name: DB_USER_NAME
           value: postgres
         - name: DB_HOST
-          value: postgresql-postgresql.devtroncd
+          value: $DB_HOST
         - name: DB_PORT
           value: "5432"
         - name: DB_NAME
-          value: lens
+          value: $DB_NAME_LENS
         - name: MIGRATE_TO_VERSION
           value: "0"
         envFrom:
         - secretRef:
             name: postgresql-migrator
-        image: $migrator
+        image: quay.io/devtron/migrator:v4.16.2
         imagePullPolicy: IfNotPresent
         name: postgresql-migrate-lens
         resources: {}
@@ -350,28 +350,25 @@ spec:
         name: shared-volume
 
 EOF
-sed -i "s|\$migrator|$migrator|g" devtron-migration.yaml
 sed -i "s|\$devtron|$devtron|g" devtron-migration.yaml
 sed -i "s|\$RANDOM|$RANDOM|g" devtron-migration.yaml
+sed -i "s|\$DB_NAME_DEVTRON|$DB_NAME_DEVTRON|g" devtron-migration.yaml
 
-sed -i "s|\$migrator|$migrator|g" casbin-migration.yaml
 sed -i "s|\$devtron|$devtron|g" casbin-migration.yaml
 sed -i "s|\$RANDOM|$RANDOM|g" casbin-migration.yaml
+sed -i "s|\$DB_NAME_CASBIN|$DB_NAME_CASBIN|g" casbin-migration.yaml
 
-sed -i "s|\$migrator|$migrator|g" git-sensor-migration.yaml
 sed -i "s|\$git_sensor|$git_sensor|g" git-sensor-migration.yaml
 sed -i "s|\$RANDOM|$RANDOM|g" git-sensor-migration.yaml
+sed -i "s|\$DB_NAME_GIT_SENSOR|$DB_NAME_GIT_SENSOR|g" git-sensor-migration.yaml
 
-sed -i "s|\$migrator|$migrator|g" lens-migration.yaml
+
 sed -i "s|\$lens|$lens|g" lens-migration.yaml
 sed -i "s|\$RANDOM|$RANDOM|g" lens-migration.yaml
+sed -i "s|\$DB_NAME_LENS|$DB_NAME_LENS|g" lens-migration.yaml
 
 
-
-kubectl set image deploy/devtron -n $DEVTRON_NAMESPACE devtron=
-kubectl set image deploy/dashboard -n $DEVTRON_NAMESPACE dashboard=
-kubectl set image deploy/kubewatch -n $DEVTRON_NAMESPACE kubewatch=
-kubectl set image deploy/kubelink -n $DEVTRON_NAMESPACE kubelink=
-kubectl set image deploy/lens -n $DEVTRON_NAMESPACE lens=
-kubectl set image sts/git-sensor -n $DEVTRON_NAMESPACE git-sensor=$git_sensor
-kubectl set image deploy/image-scanner -n devtroncd image-scanner=$image_scanner 
+sed -i "s|\$DB_HOST|$DB_HOST|g" lens-migration.yaml
+sed -i "s|\$DB_HOST|$DB_HOST|g" git-sensor-migration.yaml
+sed -i "s|\$DB_HOST|$DB_HOST|g" casbin-migration.yaml
+sed -i "s|\$DB_HOST|$DB_HOST|g" devtron-migration.yaml
