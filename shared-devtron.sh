@@ -1,5 +1,3 @@
-echo "============Starting migration==================="
-
 cat << 'EOF' > devtron-migration.yaml
 apiVersion: batch/v1
 kind: Job
