@@ -368,8 +368,12 @@ sed -i "s|\$lens|$lens|g" lens-migration.yaml
 sed -i "s|\$RANDOM|$RANDOM|g" lens-migration.yaml
 sed -i "s|\$DB_NAME_LENS|$DB_NAME_LENS|g" lens-migration.yaml
 
-
 sed -i "s|\$DB_HOST|$DB_HOST|g" lens-migration.yaml
 sed -i "s|\$DB_HOST|$DB_HOST|g" git-sensor-migration.yaml
 sed -i "s|\$DB_HOST|$DB_HOST|g" casbin-migration.yaml
 sed -i "s|\$DB_HOST|$DB_HOST|g" devtron-migration.yaml
+
+sed -i "s|\$DEVTRON_NAMESPACE|$DEVTRON_NAMESPACE|g" lens-migration.yaml
+sed -i "s|\$DEVTRON_NAMESPACE|$DEVTRON_NAMESPACE|g" git-sensor-migration.yaml
+sed -i "s|\$DEVTRON_NAMESPACE|$DEVTRON_NAMESPACE|g" casbin-migration.yaml
+sed -i "s|\$DEVTRON_NAMESPACE|$DEVTRON_NAMESPACE|g" devtron-migration.yaml
