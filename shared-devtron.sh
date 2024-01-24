@@ -83,70 +83,70 @@ spec:
         name: shared-volume
 EOF
 cat << 'EOF' > casbin-migration.yaml
-  - apiVersion: batch/v1
-    kind: Job
-    metadata:
-      name: postgresql-migrate-casbin-$RANDOM
-      namespace: $DEVTRON_NAMESPACE
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: postgresql-migrate-casbin-$RANDOM
+  namespace: $DEVTRON_NAMESPACE
+spec:
+  activeDeadlineSeconds: 1500
+  ttlSecondsAfterFinished: 600
+  backoffLimit: 20
+  completions: 1
+  parallelism: 1
+  suspend: false
+  template:
     spec:
-      activeDeadlineSeconds: 1500
-      ttlSecondsAfterFinished: 600
-      backoffLimit: 20
-      completions: 1
-      parallelism: 1
-      suspend: false
-      template:
-        spec:
-          imagePullSecrets:
-            - name: devtron-image-pull
-          initContainers:
-            - command:
-                - /bin/sh
-                - -c
-                - cp -r scripts/casbin /shared/
-              image: $devtron
-              name: init-casbin
-              volumeMounts:
-                - mountPath: /shared
-                  name: shared-volume
-          containers:
-            - command:
-                - /bin/sh
-                - -c
-                - if [ $(MIGRATE_TO_VERSION) -eq "0" ]; then migrate -path
-                  $(SCRIPT_LOCATION) -database
-                  postgres://$(DB_USER_NAME):$(DB_PASSWORD)@$(DB_HOST):$(DB_PORT)/$(DB_NAME)?sslmode=disable
-                  up;  else   echo $(MIGRATE_TO_VERSION); migrate -path
-                  $(SCRIPT_LOCATION)  -database
-                  postgres://$(DB_USER_NAME):$(DB_PASSWORD)@$(DB_HOST):$(DB_PORT)/$(DB_NAME)?sslmode=disable
-                  goto $(MIGRATE_TO_VERSION);    fi
-              env:
-                - name: SCRIPT_LOCATION
-                  value: /shared/casbin/
-                - name: DB_TYPE
-                  value: postgres
-                - name: DB_USER_NAME
-                  value: postgres
-                - name: DB_HOST
-                  value: postgresql-postgresql.devtroncd
-                - name: DB_PORT
-                  value: "5432"
-                - name: DB_NAME
-                  value: casbin_13
-                - name: MIGRATE_TO_VERSION
-                  value: "0"
-              envFrom:
-                - secretRef:
-                    name: postgresql-migrator
-              image: quay.io/devtron/migrator:v4.16.2
-              name: postgresql-migrate-casbin
-              volumeMounts:
-                - mountPath: /shared
-                  name: shared-volume
-          restartPolicy: OnFailure
-          volumes:
-            - emptyDir: {}
+      imagePullSecrets:
+        - name: devtron-image-pull
+      initContainers:
+        - command:
+            - /bin/sh
+            - -c
+            - cp -r scripts/casbin /shared/
+          image: $devtron
+          name: init-casbin
+          volumeMounts:
+            - mountPath: /shared
               name: shared-volume
+      containers:
+        - command:
+            - /bin/sh
+            - -c
+            - if [ $(MIGRATE_TO_VERSION) -eq "0" ]; then migrate -path
+              $(SCRIPT_LOCATION) -database
+              postgres://$(DB_USER_NAME):$(DB_PASSWORD)@$(DB_HOST):$(DB_PORT)/$(DB_NAME)?sslmode=disable
+              up;  else   echo $(MIGRATE_TO_VERSION); migrate -path
+              $(SCRIPT_LOCATION)  -database
+              postgres://$(DB_USER_NAME):$(DB_PASSWORD)@$(DB_HOST):$(DB_PORT)/$(DB_NAME)?sslmode=disable
+              goto $(MIGRATE_TO_VERSION);    fi
+          env:
+            - name: SCRIPT_LOCATION
+              value: /shared/casbin/
+            - name: DB_TYPE
+              value: postgres
+            - name: DB_USER_NAME
+              value: postgres
+            - name: DB_HOST
+              value: $DB_HOST
+            - name: DB_PORT
+              value: "5432"
+            - name: DB_NAME
+              value: $DB_NAME_CASBIN
+            - name: MIGRATE_TO_VERSION
+              value: "0"
+          envFrom:
+            - secretRef:
+                name: postgresql-migrator
+          image: quay.io/devtron/migrator:v4.16.2
+          name: postgresql-migrate-casbin
+          volumeMounts:
+            - mountPath: /shared
+              name: shared-volume
+      restartPolicy: OnFailure
+      volumes:
+        - emptyDir: {}
+          name: shared-volume
 EOF
 cat << 'EOF' > git-sensor-migration.yaml
 apiVersion: batch/v1
