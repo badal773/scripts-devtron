@@ -8,7 +8,7 @@ lens=quay.io/devtron/lens:98130668-540-20302
 dashboard=quay.io/devtron/dashboard:2327bac1-537-20880
 devtron=quay.io/devtron/devtron:30618a27-534-20893
 image_scanner=quay.io/devtron/image-scanner:28f95d21-559-20762
-ci_runner=quay.io/devtron/ci-runner:d4dadb96-541-20829
+ci_runner=quay.io/devtron/ci-runner:a6ab217a-541-20920
 
 # Print the values
 echo "app-sync-job: $app_sync_job"
