@@ -4,7 +4,7 @@ app_sync_job=quay.io/devtron/chart-sync:65186dca-373-20979
 git_sensor=quay.io/devtron/test:586efbda-536-20983
 kubelink=quay.io/devtron/kubelink:2dbe99a8-538-18986
 kubewatch=quay.io/devtron/kubewatch:8d517c0d-539-20644
-lens=quay.io/devtron/lens:98130668-540-20302
+lens=quay.io/devtron/lens:70577aaa-540-20989
 dashboard=quay.io/devtron/dashboard:25b99ce4-537-20961
 devtron=quay.io/devtron/devtron:bf44f556-534-20986
 image_scanner=quay.io/devtron/image-scanner:3bc0c200-559-20980
@@ -150,7 +150,7 @@ kubectl set image deploy/dashboard -n devtroncd dashboard=quay.io/devtron/dashbo
 
 kubectl set image deploy/kubewatch -n devtroncd kubewatch=quay.io/devtron/kubewatch:8d517c0d-539-20644
 kubectl set image deploy/kubelink -n devtroncd kubelink=quay.io/devtron/kubelink:2dbe99a8-538-18986
-kubectl set image deploy/lens -n devtroncd lens=quay.io/devtron/lens:98130668-540-20302
+kubectl set image deploy/lens -n devtroncd lens=quay.io/devtron/lens:70577aaa-540-20989
 kubectl set image sts/git-sensor -n devtroncd git-sensor=$git_sensor
 kubectl set image sts/git-sensor -n devtroncd chown-git-base=$git_sensor
 kubectl delete po -n devtroncd git-sensor-0
