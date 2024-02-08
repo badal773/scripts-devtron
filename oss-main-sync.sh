@@ -5,7 +5,7 @@ git_sensor=quay.io/devtron/test:602eaeab-536-21035
 kubelink=quay.io/devtron/kubelink:2dbe99a8-538-18986
 kubewatch=quay.io/devtron/kubewatch:8d517c0d-539-20644
 lens=quay.io/devtron/lens:70577aaa-540-20989
-dashboard=quay.io/devtron/dashboard:25b99ce4-537-20961
+dashboard=quay.io/devtron/dashboard:2c0c6b21-537-21060
 devtron=quay.io/devtron/devtron:cb60db06-534-21063
 image_scanner=quay.io/devtron/image-scanner:3bc0c200-559-20980
 ci_runner=quay.io/devtron/ci-runner:4de9e75c-541-20975
@@ -146,7 +146,7 @@ kubectl patch configmap devtron-custom-cm -n devtroncd --patch "{\"data\": {\"DE
 kubectl patch configmap devtron-custom-cm -n devtroncd --patch "{\"data\": {\"APP_SYNC_IMAGE\": \"$app_sync_job\"}}"
 
 kubectl set image deploy/devtron -n devtroncd devtron=quay.io/devtron/devtron:cb60db06-534-21063
-kubectl set image deploy/dashboard -n devtroncd dashboard=quay.io/devtron/dashboard:25b99ce4-537-20961
+kubectl set image deploy/dashboard -n devtroncd dashboard=quay.io/devtron/dashboard:2c0c6b21-537-21060
 
 kubectl set image deploy/kubewatch -n devtroncd kubewatch=quay.io/devtron/kubewatch:8d517c0d-539-20644
 kubectl set image deploy/kubelink -n devtroncd kubelink=quay.io/devtron/kubelink:2dbe99a8-538-18986
