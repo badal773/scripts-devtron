@@ -1,6 +1,6 @@
 #!/bin/bash
 # sed -i 's/kubectl/microk8s kubectl/g' test.sh
-app_sync_job=quay.io/devtron/chart-sync:65186dca-373-20979
+app_sync_job=quay.io/devtron/chart-sync:d0dcc590-373-21074
 git_sensor=quay.io/devtron/test:602eaeab-536-21035
 kubelink=quay.io/devtron/kubelink:2dbe99a8-538-18986
 kubewatch=quay.io/devtron/kubewatch:8d517c0d-539-20644
