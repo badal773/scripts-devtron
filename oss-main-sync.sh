@@ -7,7 +7,7 @@ kubewatch=quay.io/devtron/kubewatch:8d517c0d-539-20644
 lens=quay.io/devtron/lens:70577aaa-540-20989
 dashboard=quay.io/devtron/dashboard:872affd6-537-21346
 devtron=quay.io/devtron/devtron:1b1713bc-534-21211
-image_scanner=quay.io/devtron/image-scanner:1e0b2312-559-21160
+image_scanner=quay.io/devtron/image-scanner:bdbcef05-559-21349
 ci_runner=quay.io/devtron/ci-runner:84554651-541-21117
 
 # Print the values
