@@ -3,7 +3,7 @@
 app_sync_job=quay.io/devtron/chart-sync:d0dcc590-373-21074
 git_sensor=quay.io/devtron/test:8545feb5-536-21711
 kubelink=quay.io/devtron/kubelink:2dbe99a8-538-18986
-kubewatch=quay.io/devtron/kubewatch:8d517c0d-539-20644
+kubewatch=quay.io/devtron/kubewatch:50d4d32d-539-21712
 lens=quay.io/devtron/lens:70577aaa-540-20989
 dashboard=quay.io/devtron/dashboard:e1e3cdeb-537-21709
 devtron=quay.io/devtron/devtron:36398dbb-534-21517
@@ -148,7 +148,7 @@ kubectl patch configmap devtron-custom-cm -n devtroncd --patch "{\"data\": {\"AP
 kubectl set image deploy/devtron -n devtroncd devtron=quay.io/devtron/devtron:36398dbb-534-21517
 kubectl set image deploy/dashboard -n devtroncd dashboard=quay.io/devtron/dashboard:e1e3cdeb-537-21709
 
-kubectl set image deploy/kubewatch -n devtroncd kubewatch=quay.io/devtron/kubewatch:8d517c0d-539-20644
+kubectl set image deploy/kubewatch -n devtroncd kubewatch=quay.io/devtron/kubewatch:50d4d32d-539-21712
 kubectl set image deploy/kubelink -n devtroncd kubelink=quay.io/devtron/kubelink:2dbe99a8-538-18986
 kubectl set image deploy/lens -n devtroncd lens=quay.io/devtron/lens:70577aaa-540-20989
 kubectl set image sts/git-sensor -n devtroncd git-sensor=$git_sensor
